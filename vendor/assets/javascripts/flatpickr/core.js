@@ -1,1 +1,1034 @@
-"use strict";var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol?"symbol":typeof e},flatpickr=function e(t,n){var a=void 0,i=void 0,r=function(t){return t._flatpickr&&t._flatpickr.destroy(),t._flatpickr=new e.init(t,n),t._flatpickr};return t.nodeName?r(t):/^\#[a-zA-Z0-9\-\_]*$/.test(t)?r(document.getElementById(t.slice(1))):(a=/^\.[a-zA-Z0-9\-\_]*$/.test(t)?document.getElementsByClassName(t.slice(1)):document.querySelectorAll(t),i=[].slice.call(a).map(r),{calendars:i,byID:function(e){for(var t=0;t<i.length;t++)if(i[t].element.id===e)return i[t]}})};flatpickr.init=function(e,t){var n=function(e,t,n){var a=document.createElement(e);return n&&(a.innerHTML=n),t&&(a.className=t),a};function a(e,t){var n=!1;return function(){n||(e.call(),n=!0,setTimeout(function(){n=!1},t))}}var i,r,o,l,c,u,s,d,f,p,g,m,v,h,D,b,y,w,k,L,M,C,O,I,j,T,E,S,_,H,Y,x,N,A,F,q,W,P,B,J,$,U,z=this,K=new Date;i=function(){t=t||{},z.config={},z.element=e;for(var n in z.defaultConfig)z.config[n]=t[n]||z.element.dataset&&z.element.dataset[n.toLowerCase()]||z.element.getAttribute("data-"+n)||z.defaultConfig[n];z.input=z.config.wrap?e.querySelector("[data-input]"):e,z.input.classList.add("flatpickr-input"),z.config.defaultDate&&(z.config.defaultDate=o(z.config.defaultDate)),(z.input.value||z.config.defaultDate)&&(z.selectedDateObj=o(z.config.defaultDate||z.input.value)),r(),g(),T(),z.uDate=o,z.jumpToDate(),y()},j=function(){var e=void 0,t=void 0;do e=Math.round(Math.random()*Math.pow(10,10)),t="flatpickr-"+e;while(null!==document.getElementById(t));return t},o=function(e,t){if(t=t||!1,"today"===e)e=new Date,t=!0;else if("string"==typeof e)if(e=e.trim(),z.config.parseDate)e=z.config.parseDate(e);else if(/^\d\d\d\d\-\d{1,2}\-\d\d$/.test(e))e=new Date(e.replace(/(\d)-(\d)/g,"$1/$2"));else if(Date.parse(e))e=new Date(e);else if(/^\d\d\d\d\-\d\d\-\d\d/.test(e))e=new Date(e.replace(/(\d)-(\d)/g,"$1/$2"));else if(/^(\d?\d):(\d\d)/.test(e)){var n=e.match(/^(\d?\d):(\d\d)(:(\d\d))?/),a=0;void 0!==n[4]&&(a=n[4]),e=new Date,e.setHours(n[1],n[2],a,0)}else console.error("flatpickr: invalid date string "+e),console.info(z.element);return t&&e&&e.setHours(0,0,0,0),"true"===String(z.config.utc)&&e&&!e.fp_isUTC&&(e=e.fp_toUTC()),e},l=function(e,t){return e.getFullYear()===t.getFullYear()&&e.getMonth()===t.getMonth()&&e.getDate()===t.getDate()},r=function(){W=n("div","flatpickr-wrapper"),z.config.inline||z.config["static"]?(z.element.parentNode.insertBefore(W,z.element),W.appendChild(z.element),W.classList.add(z.config.inline?"inline":"static")):document.body.appendChild(W),z.config.altInput&&(z.altInput=n(z.input.nodeName,z.config.altInputClass+" flatpickr-input"),z.altInput.placeholder=z.input.placeholder,z.altInput.type="text",z.input.type="hidden",z.input.parentNode.insertBefore(z.altInput,z.input.nextSibling))},C=function(e){var t=z.currentYear,n=e||z.currentMonth;return 1===n&&t%4===0&&t%100!==0||t%400===0?29:z.l10n.daysInMonth[n]},y=function(){var e=void 0;if(z.selectedDateObj&&z.config.enableTime){e=z.selectedDateObj.getTime();var t,n=parseInt(P.value,10)||0,a=(60+(parseInt(B.value,10)||0))%60;z.config.enableSeconds&&(t=(60+parseInt(J.value,10)||0)%60),z.config.time_24hr||(n=n%12+12*("PM"===$.innerHTML)),z.selectedDateObj.setHours(n,a,void 0===t?z.selectedDateObj.getSeconds():t),P.value=c(z.config.time_24hr?n:(12+n)%12+12*(n%12===0)),B.value=c(a),void 0!==t&&(J.value=c(t))}z.altInput&&z.selectedDateObj&&(z.altInput.value=u(z.config.altFormat)),z.selectedDateObj&&(z.input.value=u(z.config.dateFormat)),e&&z.selectedDateObj.getTime()!==e&&E()},c=function(e){return("0"+e).slice(-2)},u=function(e){z.config.noCalendar&&(e=""),z.config.enableTime&&(e+=" "+z.config.timeFormat);for(var t="",n={D:function(){return z.l10n.weekdays.shorthand[n.w()]},F:function(){return s(n.n()-1,!1)},H:function(){return c(z.selectedDateObj.getHours())},J:function(){return n.j()+z.l10n.ordinal(n.j())},K:function(){return z.selectedDateObj.getHours()>11?"PM":"AM"},M:function(){return s(n.n()-1,!0)},S:function(){return c(z.selectedDateObj.getSeconds())},U:function(){return z.selectedDateObj.getTime()/1e3},Y:function(){return z.selectedDateObj.getFullYear()},d:function(){return c(n.j())},h:function(){return z.selectedDateObj.getHours()%12?z.selectedDateObj.getHours()%12:12},i:function(){return c(z.selectedDateObj.getMinutes())},j:function(){return z.selectedDateObj.getDate()},l:function(){return z.l10n.weekdays.longhand[n.w()]},m:function(){return c(n.n())},n:function(){return z.selectedDateObj.getMonth()+1},s:function(){return z.selectedDateObj.getSeconds()},w:function(){return z.selectedDateObj.getDay()},y:function(){return String(n.Y()).substring(2)}},a=e.split(""),i=0;i<a.length;i++){var r=a[i];n[r]&&"\\"!==a[i-1]?t+=n[r]():"\\"!==r&&(t+=r)}return t},s=function(e,t){return t||z.config.shorthandCurrentMonth?z.l10n.months.shorthand[e]:z.l10n.months.longhand[e]},d=function(e){if(z.config.minDate&&e<z.config.minDate||z.config.maxDate&&e>z.config.maxDate)return!0;e=o(e,!0);for(var t=void 0,n=0;n<z.config.disable.length;n++){if(t=z.config.disable[n],t instanceof Function&&t(e))return!0;if("string"==typeof t&&/^wkd/.test(t)&&e.getDay()===(parseInt(t.slice(-1))+z.l10n.firstDayOfWeek-1)%7)return!0;if((t instanceof Date||"string"==typeof t&&!/^wkd/.test(t))&&o(t,!0).getTime()===e.getTime())return!0;if("object"===("undefined"==typeof t?"undefined":_typeof(t))&&t.hasOwnProperty("from")&&e>=o(t.from)&&e<=o(t.to))return!0}return!1},b=function(e){e.preventDefault();var t=Math.max(-1,Math.min(1,e.wheelDelta||-e.deltaY));z.currentYear=e.target.value=parseInt(e.target.value,10)+t,z.redraw()},D=function(e){e.preventDefault();var t=parseInt(e.target.min,10),n=parseInt(e.target.max,10),a=parseInt(e.target.step,10),i=a*Math.max(-1,Math.min(1,e.wheelDelta||-e.deltaY)),r=(parseInt(e.target.value,10)+i)%(n+(0===t));r<t&&(r=n+(0===t)-a*(0===t)),e.target.value=c(r)},k=function(){N.innerHTML=s(z.currentMonth)+" ",x.value=z.currentYear},L=function(){(z.currentMonth<0||z.currentMonth>11)&&(z.currentYear+=z.currentMonth%11,z.currentMonth=(z.currentMonth+12)%12)},O=function(e){W.classList.contains("open")&&!W.contains(e.target)&&e.target!==z.element&&e.target!==z.altInput&&z.close()},M=function(e){z.currentMonth+=e,L(),k(),m()},I=function(e){e.preventDefault(),e.target.classList.contains("slot")&&(z.selectedDateObj=new Date(z.currentYear,z.currentMonth,e.target.innerHTML),y(),E(),m(),z.config.inline||z.config.enableTime||z.close())},g=function(){S=n("div","flatpickr-calendar"),S.id=j(),F=n("div","flatpickr-days"),z.config.noCalendar||(f(),p(),z.config.weekNumbers&&v(),m(),S.appendChild(F)),W.appendChild(S),z.config.enableTime&&h()},f=function(){H=n("div","flatpickr-month"),Y=n("span","flatpickr-prev-month",z.config.prevArrow),N=n("span","cur_month"),x=n("input","cur_year"),x.type="number",x.title=z.l10n.scrollTitle,A=n("span","flatpickr-next-month",z.config.nextArrow),_=n("span","flatpickr-current-month"),_.appendChild(N),_.appendChild(x),H.appendChild(Y),H.appendChild(_),H.appendChild(A),k(),S.appendChild(H)},p=function(){var e=n("div","flatpickr-weekdays"),t=z.l10n.firstDayOfWeek,a=z.l10n.weekdays.shorthand.slice();t>0&&t<a.length&&(a=[].concat(a.splice(t,a.length),a.splice(0,t))),e.innerHTML=z.config.weekNumbers?"<span>"+z.l10n.weekAbbreviation+"</span>":"",e.innerHTML+="<span>"+a.join("</span><span>")+"</span>",S.appendChild(e)},v=function(){S.classList.add("hasWeeks"),q=n("div","flatpickr-weeks"),S.appendChild(q)},m=function(){var e=(new Date(z.currentYear,z.currentMonth,1).getDay()-z.l10n.firstDayOfWeek+7)%7,t=C(),a=C((z.currentMonth-1+12)%12),i=a+1-e,r=void 0,c=void 0,u=void 0;for(z.config.weekNumbers&&q&&(q.innerHTML=""),F.innerHTML="",z.config.minDate=o(z.config.minDate,!0),z.config.maxDate=o(z.config.maxDate,!0);i<=a;i++)F.appendChild(n("span","disabled flatpickr-day",i));for(i=1;i<=42-e;i++)(i<=t||i%7===1)&&(c=new Date(z.currentYear,z.currentMonth,i,0,0,0,0,0)),z.config.weekNumbers&&q&&i%7===1&&q.appendChild(n("span","disabled flatpickr-day",c.fp_getWeek())),u=i>t||d(c),r=u?"disabled flatpickr-day":"slot flatpickr-day",!u&&l(c,K)&&(r+=" today"),!u&&z.selectedDateObj&&l(c,z.selectedDateObj)&&(r+=" selected"),F.appendChild(n("span",r,i>t?i%t:i))},h=function(){var e=n("div","flatpickr-time"),t=n("span","flatpickr-time-separator",":");P=n("input","flatpickr-hour"),B=n("input","flatpickr-minute"),P.type=B.type="number",P.value=z.selectedDateObj?c(z.selectedDateObj.getHours()):12,B.value=z.selectedDateObj?c(z.selectedDateObj.getMinutes()):"00",P.step=z.config.hourIncrement,B.step=z.config.minuteIncrement,P.min=+!z.config.time_24hr,P.max=z.config.time_24hr?23:12,B.min=0,B.max=59,P.title=B.title=z.l10n.scrollTitle,e.appendChild(P),e.appendChild(t),e.appendChild(B),z.config.enableSeconds&&(e.classList.add("has-seconds"),J=n("input","flatpickr-second"),J.type="number",J.value=z.selectedDateObj?c(z.selectedDateObj.getSeconds()):"00",J.step=5,J.min=0,J.max=59,e.appendChild(n("span","flatpickr-time-separator",":")),e.appendChild(J)),z.config.time_24hr||($=n("span","flatpickr-am-pm",["AM","PM"][P.value>11|0]),$.title=z.l10n.toggleTitle,e.appendChild($)),z.config.noCalendar&&!z.selectedDateObj&&(z.selectedDateObj=new Date),S.appendChild(e)},T=function(){function e(e){e.preventDefault(),$.innerHTML=["AM","PM"]["AM"===$.innerHTML|0]}"true"===String(z.config.clickOpens)&&(z.input.addEventListener("focus",z.open),z.altInput&&z.altInput.addEventListener("focus",z.open)),z.config.allowInput&&(z.altInput?z.altInput.addEventListener("change",w):z.input.addEventListener("change",w)),z.config.wrap&&z.element.querySelector("[data-open]")&&z.element.querySelector("[data-open]").addEventListener("click",z.open),z.config.wrap&&z.element.querySelector("[data-close]")&&z.element.querySelector("[data-close]").addEventListener("click",z.close),z.config.wrap&&z.element.querySelector("[data-toggle]")&&z.element.querySelector("[data-toggle]").addEventListener("click",z.toggle),z.config.wrap&&z.element.querySelector("[data-clear]")&&z.element.querySelector("[data-clear]").addEventListener("click",z.clear),z.config.noCalendar||(Y.addEventListener("click",function(){M(-1)}),A.addEventListener("click",function(){M(1)}),x.addEventListener("wheel",b),x.addEventListener("focus",x.select),x.addEventListener("input",function(e){z.currentYear=parseInt(e.target.value,10),z.redraw()}),F.addEventListener("click",I)),document.addEventListener("click",O,!0),document.addEventListener("focus",O,!0),z.config.enableTime&&(P.addEventListener("wheel",D),B.addEventListener("wheel",D),P.addEventListener("mouseout",y),B.addEventListener("mouseout",y),P.addEventListener("change",y),B.addEventListener("change",y),P.addEventListener("click",P.select),B.addEventListener("click",B.select),z.config.enableSeconds&&(J.addEventListener("wheel",D),J.addEventListener("mouseout",y),J.addEventListener("change",y),J.addEventListener("click",J.select)),z.config.time_24hr||($.addEventListener("focus",$.blur),$.addEventListener("click",e),$.addEventListener("wheel",e),$.addEventListener("mouseout",y))),document.createEvent?(U=document.createEvent("MouseEvent"),U.initMouseEvent("click",!0,!0,window,0,0,0,0,0,!1,!1,!1,!1,0,null)):U=new MouseEvent("click",{view:window,bubbles:!0,cancelable:!0}),window.addEventListener("resize",a(function(){!W.classList.contains("open")||z.input.disabled||z.config.inline||z.config["static"]||z.positionCalendar()},150))},z.open=function(){z.input.disabled||z.config.inline||(z.config["static"]||z.positionCalendar(),W.classList.add("open"),z.altInput?(z.config.allowInput||z.altInput.blur(),z.altInput.classList.add("active")):(z.config.allowInput||z.input.blur(),z.input.classList.add("active")),z.config.onOpen&&z.config.onOpen(z.selectedDateObj,z.input.value))},z.positionCalendar=function(){var e=z.altInput?z.altInput:z.input,t=e.getBoundingClientRect(),n=window.pageYOffset+e.offsetHeight+t.top,a=window.pageXOffset+t.left;W.style.top=n+"px",W.style.left=a+"px"},z.toggle=function(){z.input.disabled||(W.classList.toggle("open"),z.positionCalendar(),z.altInput&&z.altInput.classList.toggle("active"),z.input.classList.toggle("active"))},z.close=function(){W.classList.remove("open"),z.input.classList.remove("active"),z.altInput&&z.altInput.classList.remove("active"),z.config.onClose&&z.config.onClose(z.selectedDateObj,z.input.value)},z.clear=function(){z.input.value="",z.selectedDateObj=null,z.jumpToDate()},E=function(){z.input.dispatchEvent(U),z.config.onChange&&z.config.onChange(z.selectedDateObj,z.input.value)},w=function(e){z.setDate(z.altInput?z.altInput.value:z.input.value)},z.destroy=function(){if(document.removeEventListener("click",O,!1),z.altInput&&z.altInput.parentNode.removeChild(z.altInput),z.config.inline){var e=z.element.parentNode,t=e.removeChild(z.element);e.removeChild(S),e.parentNode.replaceChild(t,e)}else document.getElementsByTagName("body")[0].removeChild(W)},z.redraw=function(){z.config.noCalendar||(k(),m())},z.jumpToDate=function(e){e=o(e||z.selectedDateObj||z.config.defaultDate||z.config.minDate||K),z.currentYear=e.getFullYear(),z.currentMonth=e.getMonth(),z.redraw()},z.setDate=function(e,t){e=o(e),e instanceof Date&&e.getTime()&&(z.selectedDateObj=o(e),z.jumpToDate(z.selectedDateObj),y(),t&&E())},z.setTime=function(e,t,n){z.selectedDateObj&&(P.value=parseInt(e,10)%24,B.value=parseInt(t||0,10)%60,z.config.time_24hr||($.innerHTML=e>11?"PM":"AM"),y(),n&&E())},z.set=function(e,t){e in z.config&&(z.config[e]=t,z.jumpToDate())};try{i()}catch(Z){console.error(Z),console.info(z.element)}return z},flatpickr.init.prototype={l10n:{weekdays:{shorthand:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],longhand:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]},months:{shorthand:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],longhand:["January","February","March","April","May","June","July","August","September","October","November","December"]},daysInMonth:[31,28,31,30,31,30,31,31,30,31,30,31],firstDayOfWeek:0,ordinal:function(e){var t=e%100;if(t>3&&t<21)return"th";switch(t%10){case 1:return"st";case 2:return"nd";case 3:return"rd";default:return"th"}},weekAbbreviation:"Wk",scrollTitle:"Scroll to increment",toggleTitle:"Click to toggle"},defaultConfig:{utc:!1,noCalendar:!1,wrap:!1,weekNumbers:!1,allowInput:!1,clickOpens:!0,dateFormat:"Y-m-d",altInput:!1,altInputClass:"",altFormat:"F j, Y",defaultDate:null,minDate:null,maxDate:null,parseDate:!1,disable:[],shorthandCurrentMonth:!1,inline:!1,"static":!1,prevArrow:"&lt;",nextArrow:"&gt;",enableTime:!1,enableSeconds:!1,timeFormat:"h:i K",time_24hr:!1,hourIncrement:1,minuteIncrement:5,onChange:null,onOpen:null,onClose:null}},Date.prototype.fp_incr=function(e){return new Date(this.getFullYear(),this.getMonth(),this.getDate()+parseInt(e,10))},Date.prototype.fp_isUTC=!1,Date.prototype.fp_toUTC=function(){var e=new Date(this.getTime()+6e4*this.getTimezoneOffset());return e.fp_isUTC=!0,e},Date.prototype.fp_getWeek=function(){var e=new Date(this.getTime());e.setHours(0,0,0,0),e.setDate(e.getDate()+3-(e.getDay()+6)%7);var t=new Date(e.getFullYear(),0,4);return 1+Math.round(((e.getTime()-t.getTime())/864e5-3+(t.getDay()+6)%7)/7)},"classList"in document.documentElement||!Object.defineProperty||"undefined"==typeof HTMLElement||Object.defineProperty(HTMLElement.prototype,"classList",{get:function(){var e=this;function t(t){return function(n){var a=e.className.split(/\s+/),i=a.indexOf(n);t(a,i,n),e.className=a.join(" ")}}var n={add:t(function(e,t,n){return~t||e.push(n)}),remove:t(function(e,t){return~t&&e.splice(t,1)}),toggle:t(function(e,t,n){return~t?e.splice(t,1):e.push(n)}),contains:function(t){return!!~e.className.split(/\s+/).indexOf(t)}};return n}}),"undefined"!=typeof module&&(module.exports=flatpickr);
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+var flatpickr = function flatpickr(selector, config) {
+	'use strict';
+
+	var elements = void 0,
+	    instances = void 0,
+	    createInstance = function createInstance(element) {
+		if (element._flatpickr) element._flatpickr.destroy();
+
+		element._flatpickr = new flatpickr.init(element, config);
+		return element._flatpickr;
+	};
+
+	if (selector.nodeName) return createInstance(selector);
+	/*
+ Utilize the performance of native getters if applicable
+ https://jsperf.com/getelementsbyclassname-vs-queryselectorall/18
+ https://jsperf.com/jquery-vs-javascript-performance-comparison/22
+ */
+	else if (/^\#[a-zA-Z0-9\-\_]*$/.test(selector)) return createInstance(document.getElementById(selector.slice(1)));else if (/^\.[a-zA-Z0-9\-\_]*$/.test(selector)) elements = document.getElementsByClassName(selector.slice(1));else elements = document.querySelectorAll(selector);
+
+	instances = [].slice.call(elements).map(createInstance);
+
+	return {
+		calendars: instances,
+		byID: function byID(id) {
+			for (var i = 0; i < instances.length; i++) {
+				if (instances[i].element.id === id) return instances[i];
+			}
+		}
+
+	};
+};
+
+/**
+ * @constructor
+ */
+flatpickr.init = function (element, instanceConfig) {
+	'use strict';
+
+	var createElement = function createElement(tag, className, content) {
+
+		var element = document.createElement(tag);
+
+		if (content) element.innerHTML = content;
+
+		if (className) element.className = className;
+
+		return element;
+	};
+
+	function throttle(callback, limit) {
+		var wait = false;
+		return function () {
+			if (!wait) {
+				callback.call();
+				wait = true;
+				setTimeout(function () {
+					wait = false;
+				}, limit);
+			}
+		};
+	}
+
+	// functions
+	var self = this,
+	    init,
+	    wrap,
+	    uDate,
+	    equalDates,
+	    pad,
+	    formatDate,
+	    monthToStr,
+	    isDisabled,
+	    buildMonthNavigation,
+	    buildWeekdays,
+	    buildCalendar,
+	    buildDays,
+	    buildWeeks,
+	    buildTime,
+	    timeWrapper,
+	    yearScroll,
+	    updateValue,
+	    onInput,
+	    updateNavigationCurrentMonth,
+	    handleYearChange,
+	    changeMonth,
+	    getDaysinMonth,
+	    documentClick,
+	    calendarClick,
+	    getRandomCalendarIdStr,
+	    bind,
+	    triggerChange;
+
+	// elements & variables
+	var calendarContainer,
+	    navigationCurrentMonth,
+	    monthsNav,
+	    prevMonthNav,
+	    cur_year,
+	    cur_month,
+	    nextMonthNav,
+	    calendar,
+	    weekNumbers,
+	    currentDate = new Date(),
+	    wrapperElement,
+	    hourElement,
+	    minuteElement,
+	    secondElement,
+	    am_pm,
+	    clickEvt;
+
+	init = function init() {
+
+		instanceConfig = instanceConfig || {};
+
+		self.config = {};
+		self.element = element;
+
+		for (var config in self.defaultConfig) {
+			self.config[config] = instanceConfig[config] || self.element.dataset && self.element.dataset[config.toLowerCase()] || self.element.getAttribute("data-" + config) || self.defaultConfig[config];
+		}self.input = self.config.wrap ? element.querySelector("[data-input]") : element;
+		self.input.classList.add("flatpickr-input");
+
+		if (self.config.defaultDate) self.config.defaultDate = uDate(self.config.defaultDate);
+
+		if (self.input.value || self.config.defaultDate) self.selectedDateObj = uDate(self.config.defaultDate || self.input.value);
+
+		wrap();
+		buildCalendar();
+		bind();
+
+		self.uDate = uDate;
+
+		self.jumpToDate();
+		updateValue();
+	};
+
+	getRandomCalendarIdStr = function getRandomCalendarIdStr() {
+		var randNum = void 0,
+		    idStr = void 0;
+		do {
+			randNum = Math.round(Math.random() * Math.pow(10, 10));
+			idStr = 'flatpickr-' + randNum;
+		} while (document.getElementById(idStr) !== null);
+		return idStr;
+	};
+
+	uDate = function uDate(date, timeless) {
+
+		timeless = timeless || false;
+
+		if (date === 'today') {
+			date = new Date();
+			timeless = true;
+		} else if (typeof date === 'string') {
+
+			date = date.trim();
+
+			if (self.config.parseDate) date = self.config.parseDate(date);else if (/^\d\d\d\d\-\d{1,2}\-\d\d$/.test(date))
+				// this utc datestring gets parsed, but incorrectly by Date.parse
+				date = new Date(date.replace(/(\d)-(\d)/g, "$1/$2"));else if (Date.parse(date)) date = new Date(date);else if (/^\d\d\d\d\-\d\d\-\d\d/.test(date)) // disable special utc datestring
+				date = new Date(date.replace(/(\d)-(\d)/g, "$1/$2"));else if (/^(\d?\d):(\d\d)/.test(date)) {
+				// time-only picker
+				var matches = date.match(/^(\d?\d):(\d\d)(:(\d\d))?/);
+
+				var seconds = 0;
+				if (matches[4] !== undefined) seconds = matches[4];
+
+				date = new Date();
+				date.setHours(matches[1], matches[2], seconds, 0);
+			} else {
+				console.error('flatpickr: invalid date string ' + date);
+				console.info(self.element);
+			}
+		}
+
+		if (timeless && date) date.setHours(0, 0, 0, 0);
+
+		if (String(self.config.utc) === 'true' && date && !date.fp_isUTC) date = date.fp_toUTC();
+
+		return date;
+	};
+
+	equalDates = function equalDates(date1, date2) {
+		return date1.getFullYear() === date2.getFullYear() && date1.getMonth() === date2.getMonth() && date1.getDate() === date2.getDate();
+	};
+
+	wrap = function wrap() {
+
+		wrapperElement = createElement("div", "flatpickr-wrapper");
+
+		if (self.config.inline || self.config.static) {
+			// Wrap input and place calendar underneath
+			self.element.parentNode.insertBefore(wrapperElement, self.element);
+			wrapperElement.appendChild(self.element);
+
+			wrapperElement.classList.add(self.config.inline ? 'inline' : 'static');
+		} else
+			// Insert at bottom of BODY tag to display outside
+			// of relative positioned elements with css 'overflow: hidden;'
+			// property set.
+			document.body.appendChild(wrapperElement);
+
+		if (self.config.altInput) {
+			// replicate self.element
+			self.altInput = createElement(self.input.nodeName, self.config.altInputClass + " flatpickr-input");
+			self.altInput.placeholder = self.input.placeholder;
+			self.altInput.type = "text";
+
+			self.input.type = 'hidden';
+			self.input.parentNode.insertBefore(self.altInput, self.input.nextSibling);
+		}
+	};
+
+	getDaysinMonth = function getDaysinMonth(givenMonth) {
+
+		var yr = self.currentYear,
+		    month = givenMonth || self.currentMonth;
+
+		if (month === 1 && yr % 4 === 0 && yr % 100 !== 0 || yr % 400 === 0) return 29;
+
+		return self.l10n.daysInMonth[month];
+	};
+
+	updateValue = function updateValue() {
+
+		var prev_date = void 0;
+
+		if (self.selectedDateObj && self.config.enableTime) {
+
+			prev_date = self.selectedDateObj.getTime();
+
+			// update time
+			var hours = parseInt(hourElement.value, 10) || 0,
+			    minutes = (60 + (parseInt(minuteElement.value, 10) || 0)) % 60,
+			    seconds;
+
+			if (self.config.enableSeconds) seconds = (60 + parseInt(secondElement.value, 10) || 0) % 60;
+
+			if (!self.config.time_24hr) hours = hours % 12 + 12 * (am_pm.innerHTML === "PM");
+
+			self.selectedDateObj.setHours(hours, minutes, seconds === undefined ? self.selectedDateObj.getSeconds() : seconds);
+
+			hourElement.value = pad(self.config.time_24hr ? hours : (12 + hours) % 12 + 12 * (hours % 12 === 0));
+
+			minuteElement.value = pad(minutes);
+
+			if (seconds !== undefined) secondElement.value = pad(seconds);
+		}
+
+		if (self.altInput && self.selectedDateObj) self.altInput.value = formatDate(self.config.altFormat);
+
+		if (self.selectedDateObj) self.input.value = formatDate(self.config.dateFormat);
+
+		if (prev_date && self.selectedDateObj.getTime() !== prev_date) {
+			triggerChange();
+		}
+	};
+
+	pad = function pad(num) {
+		return ("0" + num).slice(-2);
+	};
+
+	formatDate = function formatDate(dateFormat) {
+
+		if (self.config.noCalendar) dateFormat = "";
+
+		if (self.config.enableTime) dateFormat += " " + self.config.timeFormat;
+
+		var formattedDate = '',
+		    formats = {
+			D: function D() {
+				return self.l10n.weekdays.shorthand[formats.w()];
+			}, // weekday name, short, e.g. Thu
+			F: function F() {
+				return monthToStr(formats.n() - 1, false);
+			}, // full month name e.g. January
+			H: function H() {
+				return pad(self.selectedDateObj.getHours());
+			}, // hours with leading zero e.g. 03
+			J: function J() {
+				return formats.j() + self.l10n.ordinal(formats.j());
+			}, // day (1-30) with ordinal suffix e.g. 1st, 2nd
+			K: function K() {
+				return self.selectedDateObj.getHours() > 11 ? "PM" : "AM";
+			}, // AM/PM
+			M: function M() {
+				return monthToStr(formats.n() - 1, true);
+			}, // shorthand month e.g. Jan
+			S: function S() {
+				return pad(self.selectedDateObj.getSeconds());
+			}, // seconds 00-59
+			U: function U() {
+				return self.selectedDateObj.getTime() / 1000;
+			},
+			Y: function Y() {
+				return self.selectedDateObj.getFullYear();
+			}, // 2016
+			d: function d() {
+				return pad(formats.j());
+			}, // day in month, padded (01-30)
+			h: function h() {
+				return self.selectedDateObj.getHours() % 12 ? self.selectedDateObj.getHours() % 12 : 12;
+			}, // hour from 1-12 (am/pm)
+			i: function i() {
+				return pad(self.selectedDateObj.getMinutes());
+			}, // minutes, padded with leading zero e.g. 09
+			j: function j() {
+				return self.selectedDateObj.getDate();
+			}, // day in month (1-30)
+			l: function l() {
+				return self.l10n.weekdays.longhand[formats.w()];
+			}, // weekday name, full, e.g. Thursday
+			m: function m() {
+				return pad(formats.n());
+			}, // padded month number (01-12)
+			n: function n() {
+				return self.selectedDateObj.getMonth() + 1;
+			}, // the month number (1-12)
+			s: function s() {
+				return self.selectedDateObj.getSeconds();
+			}, // seconds 0-59
+			w: function w() {
+				return self.selectedDateObj.getDay();
+			}, // number of the day of the week
+			y: function y() {
+				return String(formats.Y()).substring(2);
+			} // last two digits of full year e.g. 16 for full year 2016
+		},
+		    formatPieces = dateFormat.split('');
+
+		for (var i = 0; i < formatPieces.length; i++) {
+			var c = formatPieces[i];
+			if (formats[c] && formatPieces[i - 1] !== '\\') formattedDate += formats[c]();else if (c !== '\\') formattedDate += c;
+		}
+
+		return formattedDate;
+	};
+
+	monthToStr = function monthToStr(date, shorthand) {
+		return shorthand || self.config.shorthandCurrentMonth ? self.l10n.months.shorthand[date] : self.l10n.months.longhand[date];
+	};
+
+	isDisabled = function isDisabled(check_date) {
+
+		if (self.config.minDate && check_date < self.config.minDate || self.config.maxDate && check_date > self.config.maxDate) return true;
+
+		check_date = uDate(check_date, true); //timeless
+
+		var d = void 0;
+
+		for (var i = 0; i < self.config.disable.length; i++) {
+
+			d = self.config.disable[i];
+
+			if (d instanceof Function && d(check_date)) // disabled by function
+				return true;else if ( // disabled weekday
+			typeof d === 'string' && /^wkd/.test(d) && check_date.getDay() === (parseInt(d.slice(-1)) + self.l10n.firstDayOfWeek - 1) % 7) return true;else if ( // disabled by date string
+			(d instanceof Date || typeof d === 'string' && !/^wkd/.test(d)) && uDate(d, true).getTime() === check_date.getTime()) return true;else if ( // disabled by range
+			(typeof d === 'undefined' ? 'undefined' : _typeof(d)) === 'object' && d.hasOwnProperty("from") && check_date >= uDate(d.from) && check_date <= uDate(d.to)) return true;
+		}
+
+		return false;
+	};
+
+	yearScroll = function yearScroll(event) {
+		event.preventDefault();
+
+		var delta = Math.max(-1, Math.min(1, event.wheelDelta || -event.deltaY));
+		self.currentYear = event.target.value = parseInt(event.target.value, 10) + delta;
+		self.redraw();
+	};
+
+	timeWrapper = function timeWrapper(e) {
+		e.preventDefault();
+
+		var min = parseInt(e.target.min, 10),
+		    max = parseInt(e.target.max, 10),
+		    step = parseInt(e.target.step, 10),
+		    delta = step * Math.max(-1, Math.min(1, e.wheelDelta || -e.deltaY)),
+		    newValue = (parseInt(e.target.value, 10) + delta) % (max + (min === 0));
+
+		if (newValue < min) newValue = max + (min === 0) - step * (min === 0);
+
+		e.target.value = pad(newValue);
+	};
+
+	updateNavigationCurrentMonth = function updateNavigationCurrentMonth() {
+
+		cur_month.innerHTML = monthToStr(self.currentMonth) + " ";
+		cur_year.value = self.currentYear;
+	};
+
+	handleYearChange = function handleYearChange() {
+
+		if (self.currentMonth < 0 || self.currentMonth > 11) {
+
+			self.currentYear += self.currentMonth % 11;
+			self.currentMonth = (self.currentMonth + 12) % 12;
+		}
+	};
+
+	documentClick = function documentClick(event) {
+		if (!wrapperElement.classList.contains("open") || wrapperElement.contains(event.target) || event.target === self.element || event.target === self.altInput) return;
+
+		self.close();
+	};
+
+	changeMonth = function changeMonth(offset) {
+		self.currentMonth += offset;
+
+		handleYearChange();
+		updateNavigationCurrentMonth();
+		buildDays();
+	};
+
+	calendarClick = function calendarClick(e) {
+
+		e.preventDefault();
+
+		if (e.target.classList.contains('slot')) {
+
+			self.selectedDateObj = new Date(self.currentYear, self.currentMonth, e.target.innerHTML);
+
+			updateValue();
+			triggerChange();
+			buildDays();
+
+			if (!self.config.inline && !self.config.enableTime) self.close();
+		}
+	};
+
+	buildCalendar = function buildCalendar() {
+
+		calendarContainer = createElement('div', 'flatpickr-calendar');
+		calendarContainer.id = getRandomCalendarIdStr();
+
+		calendar = createElement("div", "flatpickr-days");
+
+		if (!self.config.noCalendar) {
+			buildMonthNavigation();
+			buildWeekdays();
+
+			if (self.config.weekNumbers) buildWeeks();
+
+			buildDays();
+
+			calendarContainer.appendChild(calendar);
+		}
+
+		wrapperElement.appendChild(calendarContainer);
+
+		if (self.config.enableTime) buildTime();
+	};
+
+	buildMonthNavigation = function buildMonthNavigation() {
+
+		monthsNav = createElement("div", "flatpickr-month");
+
+		prevMonthNav = createElement("span", "flatpickr-prev-month", self.config.prevArrow);
+
+		cur_month = createElement("span", "cur_month");
+
+		cur_year = createElement("input", "cur_year");
+		cur_year.type = "number";
+		cur_year.title = self.l10n.scrollTitle;
+
+		nextMonthNav = createElement("span", "flatpickr-next-month", self.config.nextArrow);
+
+		navigationCurrentMonth = createElement('span', 'flatpickr-current-month');
+		navigationCurrentMonth.appendChild(cur_month);
+		navigationCurrentMonth.appendChild(cur_year);
+
+		monthsNav.appendChild(prevMonthNav);
+		monthsNav.appendChild(navigationCurrentMonth);
+		monthsNav.appendChild(nextMonthNav);
+
+		updateNavigationCurrentMonth();
+		calendarContainer.appendChild(monthsNav);
+	};
+
+	buildWeekdays = function buildWeekdays() {
+
+		var weekdayContainer = createElement('div', "flatpickr-weekdays"),
+		    firstDayOfWeek = self.l10n.firstDayOfWeek,
+		    weekdays = self.l10n.weekdays.shorthand.slice();
+
+		if (firstDayOfWeek > 0 && firstDayOfWeek < weekdays.length) {
+			weekdays = [].concat(weekdays.splice(firstDayOfWeek, weekdays.length), weekdays.splice(0, firstDayOfWeek));
+		}
+
+		weekdayContainer.innerHTML = self.config.weekNumbers ? "<span>" + self.l10n.weekAbbreviation + "</span>" : "";
+		weekdayContainer.innerHTML += '<span>' + weekdays.join('</span><span>') + '</span>';
+
+		calendarContainer.appendChild(weekdayContainer);
+	};
+
+	buildWeeks = function buildWeeks() {
+
+		calendarContainer.classList.add("hasWeeks");
+
+		weekNumbers = createElement("div", 'flatpickr-weeks');
+		calendarContainer.appendChild(weekNumbers);
+	};
+
+	buildDays = function buildDays() {
+
+		var firstOfMonth = (new Date(self.currentYear, self.currentMonth, 1).getDay() - self.l10n.firstDayOfWeek + 7) % 7,
+		    numDays = getDaysinMonth(),
+		    prevMonthDays = getDaysinMonth((self.currentMonth - 1 + 12) % 12),
+		    dayNumber = prevMonthDays + 1 - firstOfMonth,
+		    className = void 0,
+		    cur_date = void 0,
+		    date_is_disabled = void 0;
+
+		if (self.config.weekNumbers && weekNumbers) weekNumbers.innerHTML = '';
+
+		calendar.innerHTML = '';
+
+		self.config.minDate = uDate(self.config.minDate, true);
+		self.config.maxDate = uDate(self.config.maxDate, true);
+
+		// prepend days from the ending of previous month
+		for (; dayNumber <= prevMonthDays; dayNumber++) {
+			calendar.appendChild(createElement("span", "disabled flatpickr-day", dayNumber));
+		} // Start at 1 since there is no 0th day
+		for (dayNumber = 1; dayNumber <= 42 - firstOfMonth; dayNumber++) {
+
+			if (dayNumber <= numDays || dayNumber % 7 === 1) // avoids new date objects for appended dates
+				cur_date = new Date(self.currentYear, self.currentMonth, dayNumber, 0, 0, 0, 0, 0);
+
+			if (self.config.weekNumbers && weekNumbers && dayNumber % 7 === 1) weekNumbers.appendChild(createElement("span", "disabled flatpickr-day", cur_date.fp_getWeek()));
+
+			date_is_disabled = dayNumber > numDays || isDisabled(cur_date);
+
+			className = date_is_disabled ? "disabled flatpickr-day" : "slot flatpickr-day";
+
+			if (!date_is_disabled && equalDates(cur_date, currentDate)) className += ' today';
+
+			if (!date_is_disabled && self.selectedDateObj && equalDates(cur_date, self.selectedDateObj)) className += ' selected';
+
+			calendar.appendChild(createElement("span", className, dayNumber > numDays ? dayNumber % numDays : dayNumber));
+		}
+	};
+
+	buildTime = function buildTime() {
+
+		var timeContainer = createElement("div", "flatpickr-time"),
+		    separator = createElement("span", "flatpickr-time-separator", ":");
+
+		hourElement = createElement("input", "flatpickr-hour");
+		minuteElement = createElement("input", "flatpickr-minute");
+
+		hourElement.type = minuteElement.type = "number";
+
+		hourElement.value = self.selectedDateObj ? pad(self.selectedDateObj.getHours()) : 12;
+
+		minuteElement.value = self.selectedDateObj ? pad(self.selectedDateObj.getMinutes()) : "00";
+
+		hourElement.step = self.config.hourIncrement;
+		minuteElement.step = self.config.minuteIncrement;
+
+		hourElement.min = +!self.config.time_24hr; // 0 in 24hr mode, 1 in 12hr mode
+		hourElement.max = self.config.time_24hr ? 23 : 12;
+
+		minuteElement.min = 0;
+		minuteElement.max = 59;
+
+		hourElement.title = minuteElement.title = self.l10n.scrollTitle;
+
+		timeContainer.appendChild(hourElement);
+		timeContainer.appendChild(separator);
+		timeContainer.appendChild(minuteElement);
+
+		if (self.config.enableSeconds) {
+
+			timeContainer.classList.add("has-seconds");
+
+			secondElement = createElement("input", "flatpickr-second");
+			secondElement.type = "number";
+			secondElement.value = self.selectedDateObj ? pad(self.selectedDateObj.getSeconds()) : "00";
+
+			secondElement.step = 5;
+			secondElement.min = 0;
+			secondElement.max = 59;
+
+			timeContainer.appendChild(createElement("span", "flatpickr-time-separator", ":"));
+			timeContainer.appendChild(secondElement);
+		}
+
+		if (!self.config.time_24hr) {
+			// add am_pm if appropriate
+			am_pm = createElement("span", "flatpickr-am-pm", ["AM", "PM"][hourElement.value > 11 | 0]);
+			am_pm.title = self.l10n.toggleTitle;
+			timeContainer.appendChild(am_pm);
+		}
+
+		// picking time only
+		if (self.config.noCalendar && !self.selectedDateObj) self.selectedDateObj = new Date();
+
+		calendarContainer.appendChild(timeContainer);
+	};
+
+	bind = function bind() {
+
+		function am_pm_toggle(e) {
+			e.preventDefault();
+			am_pm.innerHTML = ["AM", "PM"][am_pm.innerHTML === "AM" | 0];
+		}
+
+		if (String(self.config.clickOpens) === 'true') {
+			self.input.addEventListener('focus', self.open);
+
+			if (self.altInput) self.altInput.addEventListener('focus', self.open);
+		}
+
+		if (self.config.allowInput) {
+			if (self.altInput) self.altInput.addEventListener('change', onInput);else self.input.addEventListener('change', onInput);
+		}
+
+		if (self.config.wrap && self.element.querySelector("[data-open]")) self.element.querySelector("[data-open]").addEventListener('click', self.open);
+
+		if (self.config.wrap && self.element.querySelector("[data-close]")) self.element.querySelector("[data-close]").addEventListener('click', self.close);
+
+		if (self.config.wrap && self.element.querySelector("[data-toggle]")) self.element.querySelector("[data-toggle]").addEventListener('click', self.toggle);
+
+		if (self.config.wrap && self.element.querySelector("[data-clear]")) self.element.querySelector("[data-clear]").addEventListener('click', self.clear);
+
+		if (!self.config.noCalendar) {
+
+			prevMonthNav.addEventListener('click', function () {
+				changeMonth(-1);
+			});
+			nextMonthNav.addEventListener('click', function () {
+				changeMonth(1);
+			});
+
+			cur_year.addEventListener('wheel', yearScroll);
+			cur_year.addEventListener("focus", cur_year.select);
+			cur_year.addEventListener("input", function (event) {
+
+				self.currentYear = parseInt(event.target.value, 10);
+				self.redraw();
+			});
+
+			calendar.addEventListener('click', calendarClick);
+		}
+
+		document.addEventListener('click', documentClick, true);
+		document.addEventListener('focus', documentClick, true);
+
+		if (self.config.enableTime) {
+
+			hourElement.addEventListener("wheel", timeWrapper);
+			minuteElement.addEventListener("wheel", timeWrapper);
+
+			hourElement.addEventListener("mouseout", updateValue);
+			minuteElement.addEventListener("mouseout", updateValue);
+
+			hourElement.addEventListener("change", updateValue);
+			minuteElement.addEventListener("change", updateValue);
+
+			hourElement.addEventListener("click", hourElement.select);
+			minuteElement.addEventListener("click", minuteElement.select);
+
+			if (self.config.enableSeconds) {
+				secondElement.addEventListener("wheel", timeWrapper);
+				secondElement.addEventListener("mouseout", updateValue);
+				secondElement.addEventListener("change", updateValue);
+				secondElement.addEventListener("click", secondElement.select);
+			}
+
+			if (!self.config.time_24hr) {
+				am_pm.addEventListener("focus", am_pm.blur);
+				am_pm.addEventListener("click", am_pm_toggle);
+
+				am_pm.addEventListener("wheel", am_pm_toggle);
+				am_pm.addEventListener("mouseout", updateValue);
+			}
+		}
+
+		if (document.createEvent) {
+			clickEvt = document.createEvent("MouseEvent");
+			// without all these args ms edge spergs out
+			clickEvt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+		} else clickEvt = new MouseEvent('click', {
+			'view': window,
+			'bubbles': true,
+			'cancelable': true
+		});
+
+		window.addEventListener('resize', throttle(function () {
+
+			if (wrapperElement.classList.contains('open') && !self.input.disabled && !self.config.inline && !self.config.static) self.positionCalendar();
+		}, 150));
+	};
+
+	self.open = function () {
+
+		if (self.input.disabled || self.config.inline) return;
+
+		if (!self.config.static) self.positionCalendar();
+
+		wrapperElement.classList.add('open');
+
+		if (self.altInput) {
+			if (!self.config.allowInput) self.altInput.blur();
+			self.altInput.classList.add('active');
+		} else {
+			if (!self.config.allowInput) self.input.blur();
+			self.input.classList.add('active');
+		}
+
+		if (self.config.onOpen) self.config.onOpen(self.selectedDateObj, self.input.value);
+	};
+
+	// For calendars inserted in BODY (as opposed to inline wrapper)
+	// it's necessary to properly calculate top/left position.
+	self.positionCalendar = function () {
+
+		var input = self.altInput ? self.altInput : self.input,
+		    bounds = input.getBoundingClientRect(),
+
+		// account for scroll & input height
+		top = window.pageYOffset + input.offsetHeight + bounds.top,
+		    left = window.pageXOffset + bounds.left;
+
+		wrapperElement.style.top = top + 'px';
+		wrapperElement.style.left = left + 'px';
+	};
+
+	self.toggle = function () {
+		if (self.input.disabled) return;
+
+		wrapperElement.classList.toggle('open');
+		self.positionCalendar();
+
+		if (self.altInput) self.altInput.classList.toggle('active');
+
+		self.input.classList.toggle('active');
+	};
+
+	self.close = function () {
+		wrapperElement.classList.remove('open');
+		self.input.classList.remove('active');
+
+		if (self.altInput) self.altInput.classList.remove('active');
+
+		if (self.config.onClose) self.config.onClose(self.selectedDateObj, self.input.value);
+	};
+
+	self.clear = function () {
+		self.input.value = "";
+		self.selectedDateObj = null;
+		self.jumpToDate();
+	};
+
+	triggerChange = function triggerChange() {
+
+		self.input.dispatchEvent(clickEvt);
+
+		if (self.config.onChange) self.config.onChange(self.selectedDateObj, self.input.value);
+	};
+
+	onInput = function onInput(event) {
+
+		self.setDate(self.altInput ? self.altInput.value : self.input.value);
+	};
+
+	self.destroy = function () {
+
+		document.removeEventListener('click', documentClick, false);
+
+		if (self.altInput) self.altInput.parentNode.removeChild(self.altInput);
+
+		if (self.config.inline) {
+
+			var parent = self.element.parentNode,
+			    _element = parent.removeChild(self.element);
+
+			parent.removeChild(calendarContainer);
+			parent.parentNode.replaceChild(_element, parent);
+		} else document.getElementsByTagName("body")[0].removeChild(wrapperElement);
+	};
+
+	self.redraw = function () {
+
+		if (self.config.noCalendar) return;
+
+		updateNavigationCurrentMonth();
+		buildDays();
+	};
+
+	self.jumpToDate = function (jumpDate) {
+
+		jumpDate = uDate(jumpDate || self.selectedDateObj || self.config.defaultDate || self.config.minDate || currentDate);
+
+		self.currentYear = jumpDate.getFullYear();
+		self.currentMonth = jumpDate.getMonth();
+		self.redraw();
+	};
+
+	self.setDate = function (date, triggerChangeEvent) {
+
+		date = uDate(date);
+
+		if (date instanceof Date && date.getTime()) {
+
+			self.selectedDateObj = uDate(date);
+			self.jumpToDate(self.selectedDateObj);
+			updateValue();
+
+			if (triggerChangeEvent || false) triggerChange();
+		}
+	};
+
+	self.setTime = function (hour, minute, triggerChangeEvent) {
+
+		if (!self.selectedDateObj) return;
+
+		hourElement.value = parseInt(hour, 10) % 24;
+		minuteElement.value = parseInt(minute || 0, 10) % 60;
+
+		if (!self.config.time_24hr) am_pm.innerHTML = hour > 11 ? "PM" : "AM";
+
+		updateValue();
+
+		if (triggerChangeEvent || false) triggerChange();
+	};
+
+	self.set = function (key, value) {
+
+		if (key in self.config) {
+			self.config[key] = value;
+			self.jumpToDate();
+		}
+	};
+
+	try {
+		init();
+	} catch (error) {
+		console.error(error);console.info(self.element);
+	} // skip and carry on
+
+	return self;
+};
+
+flatpickr.init.prototype = {
+
+	l10n: {
+		weekdays: {
+			shorthand: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+			longhand: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+		},
+		months: {
+			shorthand: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+			longhand: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+		},
+		daysInMonth: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+		firstDayOfWeek: 0,
+		ordinal: function ordinal(nth) {
+			var s = nth % 100;
+			if (s > 3 && s < 21) return "th";
+			switch (s % 10) {
+				case 1:
+					return "st";
+				case 2:
+					return "nd";
+				case 3:
+					return "rd";
+				default:
+					return "th";
+			}
+		},
+		weekAbbreviation: "Wk",
+		scrollTitle: "Scroll to increment",
+		toggleTitle: "Click to toggle"
+	},
+
+	defaultConfig: {
+		/* if true, dates will be parsed, formatted, and displayed in UTC.
+  preloading date strings w/ timezones is recommended but not necessary */
+		utc: false,
+
+		// noCalendar: true will hide the calendar. use for a time picker along w/ enableTime
+		noCalendar: false,
+
+		// wrap: see https://chmln.github.io/flatpickr/#strap
+		wrap: false,
+
+		// enables week numbers
+		weekNumbers: false,
+
+		allowInput: false,
+
+		/* clicking on input opens the date(time)picker. disable if you wish to open the calendar manually with .open() */
+		clickOpens: true,
+
+		// more date format chars at https://chmln.github.io/flatpickr/#dateformat
+		dateFormat: 'Y-m-d',
+
+		// altInput - see https://chmln.github.io/flatpickr/#altinput
+		altInput: false,
+
+		// the created altInput element will have this class.
+		altInputClass: "",
+
+		// same as dateFormat, but for altInput
+		altFormat: "F j, Y", // defaults to e.g. June 10, 2016
+
+		// defaultDate - either a datestring or a date object. used for datetimepicker's initial value
+		defaultDate: null,
+
+		// the minimum date that user can pick (inclusive)
+		minDate: null,
+
+		// the maximum date that user can pick (inclusive)
+		maxDate: null,
+
+		// dateparser that transforms a given string to a date object
+		parseDate: false,
+
+		// see https://chmln.github.io/flatpickr/#disable
+		disable: [],
+
+		// display the short version of month names - e.g. Sep instead of September
+		shorthandCurrentMonth: false,
+
+		// displays calendar inline. see https://chmln.github.io/flatpickr/#inline-calendar
+		inline: false,
+
+		// position calendar inside wrapper and next to the input element
+		// leave at false unless you know what you're doing
+		static: false,
+
+		// code for previous/next icons. this is where you put your custom icon code e.g. fontawesome
+		prevArrow: '&lt;',
+		nextArrow: '&gt;',
+
+		// enables the time picker functionality
+		enableTime: false,
+
+		// enables seconds in the time picker
+		enableSeconds: false,
+
+		// self-explanatory. defaults to e.g. 3:02 PM
+		timeFormat: "h:i K",
+
+		// display time picker in 24 hour mode
+		time_24hr: false,
+
+		// step size used when scrolling/incrementing the hour element
+		hourIncrement: 1,
+
+		// step size used when scrolling/incrementing the minute element
+		minuteIncrement: 5,
+
+		// onChange callback when user selects a date or time
+		onChange: null, //function(dateObj, dateStr){}
+
+		// called every time calendar is opened
+		onOpen: null, // function(dateObj, dateStr){}
+
+		// called every time calendar is closed
+		onClose: null // function(dateObj, dateStr){}
+	}
+};
+
+Date.prototype.fp_incr = function (days) {
+	return new Date(this.getFullYear(), this.getMonth(), this.getDate() + parseInt(days, 10));
+};
+
+Date.prototype.fp_isUTC = false;
+Date.prototype.fp_toUTC = function () {
+
+	var new_date = new Date(this.getTime() + this.getTimezoneOffset() * 60000);
+	new_date.fp_isUTC = true;
+
+	return new_date;
+};
+
+Date.prototype.fp_getWeek = function () {
+
+	var date = new Date(this.getTime());
+	date.setHours(0, 0, 0, 0);
+
+	// Thursday in current week decides the year.
+	date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+	// January 4 is always in week 1.
+	var week1 = new Date(date.getFullYear(), 0, 4);
+	// Adjust to Thursday in week 1 and count number of weeks from date to week1.
+	return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+};
+
+// classList polyfill
+if (!("classList" in document.documentElement) && Object.defineProperty && typeof HTMLElement !== 'undefined') {
+	Object.defineProperty(HTMLElement.prototype, 'classList', {
+		get: function get() {
+			var self = this;
+			function update(fn) {
+				return function (value) {
+					var classes = self.className.split(/\s+/),
+					    index = classes.indexOf(value);
+
+					fn(classes, index, value);
+					self.className = classes.join(" ");
+				};
+			}
+
+			var ret = {
+				add: update(function (classes, index, value) {
+					return ~index || classes.push(value);
+				}),
+				remove: update(function (classes, index) {
+					return ~index && classes.splice(index, 1);
+				}),
+				toggle: update(function (classes, index, value) {
+					return ~index ? classes.splice(index, 1) : classes.push(value);
+				}),
+				contains: function contains(value) {
+					return !!~self.className.split(/\s+/).indexOf(value);
+				}
+			};
+
+			return ret;
+		}
+	});
+}
+
+if (typeof module !== 'undefined') module.exports = flatpickr;

@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["jirenpatel@gmail.com"]
 
   spec.summary       = %q{A lightweight & powerful datetimepicker gem }
-  spec.description   = %q{ JS lib https://github.com/chmln/flatpickr }
+  spec.description   = %q{A lightweight & powerful datetimepicker using flatpickr lib https://github.com/chmln/flatpickr }
   spec.homepage      = "https://github.com/jiren/flatpickr_rails"
   spec.license       = "MIT"
 
