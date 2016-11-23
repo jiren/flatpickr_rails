@@ -26,29 +26,28 @@ Or install it yourself as:
 
 Add this line to app/assets/stylesheets/application.css
 
-``` css
- *= require "flatpickr"
- *= require "flatpickr.material_red"  # Themes
- OR
- *= require "flatpickr.confetti.css"
- OR
- *= require "flatpickr.css"
- OR
- *= require "flatpickr.dark.css"
- OR
- *= require "flatpickr.material_blue.css"
- OR
- *= require "flatpickr.material_green.css"
- OR
- *= require "flatpickr.material_orange.css"
- OR
- *= require "flatpickr.material_red.css"
-```
-
+```css
+ *= require flatpickr
+ ```
+ 
+ To use one of the themes, add:
+ 
+ ```css
+ *= require flatpickr.material_red
+ ```
+ 
+Available themes are: airbnb, base16_flat, confetti, dark, material_blue, material_green, material_orange, material_red.
+ 
 Add this line to app/assets/javascripts/application.js
 
-``` javascript
+```javascript
 //= require flatpickr
+```
+
+If you need locales, add them like this:
+
+```javascript
+//= require flatpickr/l10n/es
 ```
 
 ## Using flatpickr-rails
@@ -66,11 +65,17 @@ Add this line to app/assets/javascripts/application.js
 </script>
 ```
 
+or with jQuery:
+
+```javascript
+$('#flatpickr-input').flatpickr();
+```
+
 Examples:
 
 https://github.com/chmln/flatpickr
 
-There are a lot of options you can pass to datepicker(). They are documented at [https://chmln.github.io/flatpickr/](https://chmln.github.io/flatpickr/)
+There are a lot of options you can pass to flatpickr(). They are documented at [https://chmln.github.io/flatpickr/](https://chmln.github.io/flatpickr/)
 
 ## Development
 
