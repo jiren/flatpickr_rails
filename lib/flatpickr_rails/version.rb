@@ -1,3 +1,3 @@
 module FlatpickrRails
-  VERSION = '2.1.1'
+  VERSION = '0.0.3'
 end
