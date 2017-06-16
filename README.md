@@ -33,7 +33,7 @@ Add this line to app/assets/stylesheets/application.css
  To use one of the themes, add:
  
  ```css
- *= require flatpickr.material_red
+ *= require flatpickr/material_red
  ```
  
 Available themes are: airbnb, base16_flat, confetti, dark, material_blue, material_green, material_orange, material_red.
